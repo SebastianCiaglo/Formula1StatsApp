@@ -7,15 +7,14 @@ Console.WriteLine();
 Console.WriteLine("Enter Name of the driver");
 string name = Console.ReadLine();
 
-
 Console.WriteLine("Enter Surname of the driver");
 string surname = Console.ReadLine();
 
-var driverInFile = new DriverInFile(name, surname);
-var driversRating = new DriversRating(name, surname);
+var driversInFile = new DriverInFile(name, surname);
+var driversInMemory = new DriverInMemory(name, surname);
 
-driverInFile.ResultAdded += DriverResultAdded;
-driversRating.ResultAdded += DriverRatingAdded;
+driversInFile.ResultAdded += DriverResultAdded;
+driversInMemory.ResultAdded += DriverRatingAdded;
 
 void DriverResultAdded(object sender, EventArgs args)
 {
@@ -26,7 +25,6 @@ void DriverRatingAdded(object sender, EventArgs args)
 {
     Console.WriteLine("Rating added");
 }
-
 
 while (true)
 {
@@ -44,33 +42,23 @@ while (true)
     
     if (input == "A" || input == "B" || input == "C" || input == "D" || input == "E")
     {
-        driversRating.AddResult(input);
-
-        void ResultAdded(object sender, EventArgs args)
-        {
-        }
-    
+        driversInMemory.AddResult(input);
+        driversInMemory.ResultAdded += DriverResultAdded;
     }
     else if(input =="+") 
     {
-        driverInFile.AddFastLapPoint(true);
-
-        void ResultAdded(object sender, EventArgs args)
-        {
-        }
+        driversInFile.AddFastLapPoint(true);
+        driversInFile.ResultAdded += DriverResultAdded;
     }
     else
     {
         try
         {
-            driverInFile.AddResult(input);
+            driversInFile.AddResult(input);
 
             if (true)
             {
-                void ResultAdded(object sender, EventArgs args)
-                {
-                    Console.WriteLine("Result added");
-                }
+                driversInFile.ResultAdded += DriverResultAdded;
             }
         }
         catch (Exception e)
@@ -78,18 +66,22 @@ while (true)
             Console.WriteLine($"Exception catched: {e.Message}");
         }
     }
+    driversInFile.ResultAdded -= DriverResultAdded;
+    driversInMemory.ResultAdded -= DriverResultAdded;
 
 }
 
-var statistics = driverInFile.GetStatistics();
+void ResultAdded(object sender, EventArgs args)
+{
+    Console.WriteLine("Result added");
+}
 
+var statistics = driversInFile.GetStatistics();
 
 Console.WriteLine($"Min: {statistics.Min}");
 Console.WriteLine($"Max: {statistics.Max}");
 Console.WriteLine($"SeasonResult: {statistics.Sum}");
 
-var statistics2 = driversRating.GetStatistics();
+var statistics2 = driversInMemory.GetStatistics();
 
-
-
-Console.WriteLine($"AverageRating: {driversRating.ConvertNumberGradeToLetter(statistics2.Average)}");
+Console.WriteLine($"AverageRating: {driversInMemory.ConvertNumberGradeToLetter(statistics2.Average)}");

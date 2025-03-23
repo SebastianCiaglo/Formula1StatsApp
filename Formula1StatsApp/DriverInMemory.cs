@@ -1,14 +1,12 @@
-﻿using System.Drawing;
-
-namespace Formula1StatsApp
+﻿namespace Formula1StatsApp
 {
-    public class DriversRating : DriverBase
+    public class DriverInMemory : DriverBase
     {
         public override event ResultAddedDelegate ResultAdded;
 
         private List<int> points = new List<int>();
 
-        public DriversRating(string name, string surname) : base(name, surname) 
+        public DriverInMemory(string name, string surname) : base(name, surname) 
         {
         
         }
@@ -23,7 +21,21 @@ namespace Formula1StatsApp
             }
         }
 
-
+        public override void AddPenalty(int penalty)
+        {
+            if (penalty < 0 && penalty > -5)
+            {
+                AddPoints(penalty);
+            }
+            else if (penalty > 0)
+            {
+                throw new Exception("Incorrect position");
+            }
+            else
+            {
+                throw new Exception("Penalty out of range");
+            }
+        }
         public override void AddResult(string result)
         {
             switch (result)
@@ -56,7 +68,6 @@ namespace Formula1StatsApp
 
             if (this.points.Count > 0)
             {
-
 
                 foreach (var point in this.points)
                 {

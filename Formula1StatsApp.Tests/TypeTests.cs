@@ -20,7 +20,6 @@
 
             average=(Convert.ToDouble(input1)+input2+input3)/3;
             
-
             //assert
 
             Assert.AreEqual(Math.Round(result,2),Math.Round(average,2));
@@ -36,10 +35,8 @@
 
             //act
 
-
             //assert
             Assert.AreEqual(driver1.Name, driver2.Name);
-
         }
 
         public void ValueTypeTest()
@@ -58,10 +55,9 @@
 
         }
 
-        private DriversRating GetDriver(string name, string surname)
+        private DriverInMemory GetDriver(string name, string surname)
         {
-            return new DriversRating(name, surname);
+            return new DriverInMemory(name, surname);
         }
-
     }
 }

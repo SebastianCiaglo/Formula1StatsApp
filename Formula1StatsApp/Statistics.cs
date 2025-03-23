@@ -19,7 +19,6 @@
 
         }
 
-
         public Statistics()
         {
             this.Count = 0;

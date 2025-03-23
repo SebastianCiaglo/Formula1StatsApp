@@ -11,16 +11,6 @@
 
         }
 
-        /*
-        private string Filename
-        {
-            get
-            {
-                return $"{this.Name}{this.Surname}.txt";
-            }
-        }
-        */
-
         public override void AddPoints(int points)
         {
             if (points >= -5 && points <= 25)
@@ -37,8 +27,7 @@
             }
         }
 
-
-        public void AddPenalty(int penalty)
+        public override void AddPenalty(int penalty)
         {
             if (penalty < 0 && penalty >-5)
             {
@@ -62,8 +51,6 @@
             }
         }
 
-
-
         public void AddResult(int result)
         {
             switch (result)
@@ -86,7 +73,6 @@
                     AddPenalty(result);
                     break;
             }
-
         }
 
         public override void AddResult(string result)
@@ -111,10 +97,7 @@
             {
                 File.Delete(filename);
             }
-
         }
-
-
 
         public override Statistics GetStatistics()
         {
@@ -139,8 +122,6 @@
                     }
 
                 }
-
-
             }
             return statistics;
         }

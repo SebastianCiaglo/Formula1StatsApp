@@ -9,7 +9,6 @@
 
         }
 
-
         public string Name { get; private set; }
         public string Surname { get; private set;}
 
@@ -18,6 +17,7 @@
         public delegate void ResultAddedDelegate(object sender, EventArgs args);
 
         public abstract void AddPoints(int points);
+        public abstract void AddPenalty(int penalty);
         public abstract void AddResult(string result);
         public abstract Statistics GetStatistics();
     }

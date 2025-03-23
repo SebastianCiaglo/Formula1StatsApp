@@ -9,7 +9,6 @@
 
         void AddResult(string result);
 
-
         event DriverBase.ResultAddedDelegate ResultAdded;
 
         Statistics GetStatistics(); 

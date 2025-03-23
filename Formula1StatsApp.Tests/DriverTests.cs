@@ -12,7 +12,6 @@ namespace Formula1StatsApp.Tests
 
             driverInFile.AddResult("1");
             driverInFile.AddResult("3");
-            //driverInFile.AddResult("41");
             driverInFile.AddResult("-4");
             driverInFile.AddResult("dnf");
 
@@ -38,7 +37,6 @@ namespace Formula1StatsApp.Tests
 
             driverInFile.AddResult("1");
             driverInFile.AddResult("3");
-            //driverInFile.AddResult("41");
             driverInFile.AddResult("-4");
             driverInFile.AddResult("dnf");
 
@@ -59,9 +57,8 @@ namespace Formula1StatsApp.Tests
         public void WhenStatisticsCalled_CorrectRatingReturned()
         {
             //arrange
-
   
-            var driversRating = new DriversRating("Sergio", "Perez");
+            var driversRating = new DriverInMemory("Sergio", "Perez");
 
             driversRating.AddResult("A");
             driversRating.AddResult("B");
